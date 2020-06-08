@@ -4,6 +4,8 @@ import io from 'socket.io-client'
 
 const channel = geckos()
 
+const h1 = document.getElementsByTagName('H1')[0]
+
 channel.onConnect(error => {
   if (error) {
     console.error(error.message)
@@ -22,6 +24,10 @@ channel.onConnect(error => {
     // @ts-ignore
     const length = new Uint8Array(data).length
     bytes += length
-    console.log('Nr. ', i, (bytes / 1024 / (now - time)).toFixed(2), 'MBytes/s')
+    const text = `Packages: ${i} @ ${(bytes / 1024 / (now - time)).toFixed(
+      2
+    )} MBytes/s`
+    h1.innerHTML = text
+    console.log(text)
   })
 })
