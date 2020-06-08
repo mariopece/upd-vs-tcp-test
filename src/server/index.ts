@@ -2,8 +2,9 @@ import { ExtendedObject3D } from 'enable3d'
 import geckos, { iceServers, ServerChannel } from '@geckos.io/server'
 import { Ammo, Physics, ServerClock } from '@enable3d/ammo-on-nodejs'
 
-const FPS = 20
-const KB = 4 * 1024
+const FPS = 60
+const KB = 8 * 1024
+const packages = 1800
 
 // const io1 = geckos({ iceServers })
 const io1 = geckos({ iceServers })
@@ -16,7 +17,7 @@ io1.onConnection((channel: ServerChannel) => {
 
   const interval = setInterval(() => {
     sent++
-    if (sent >= 500) return
+    if (sent >= packages) return
 
     // @ts-ignore
     if (channel.dataChannel.bufferedAmount === 0) {
