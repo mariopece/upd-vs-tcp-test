@@ -3,6 +3,7 @@ import geckos, { iceServers, ServerChannel } from '@geckos.io/server'
 import { Ammo, Physics, ServerClock } from '@enable3d/ammo-on-nodejs'
 
 const FPS = 60
+const KB = 128 * 1024
 
 // const io1 = geckos({ iceServers })
 const io1 = geckos({ iceServers })
@@ -14,9 +15,15 @@ io1.onConnection(channel => {
 
   const interval = setInterval(() => {
     if (channel.dataChannel.bufferedAmount === 0) {
-      channel.raw.emit(Buffer.alloc(16 * 1024))
+      channel.raw.emit(Buffer.alloc(KB))
     } else {
-      if (Math.random() > 0.75) channel.raw.emit(Buffer.alloc(16 * 1024))
+      let b = channel.dataChannel.bufferedAmount / KB
+      let random = 1 - 1 / b / 2
+
+      if (Math.random() > random) {
+        // console.log('send buffered message', b, random)
+        channel.raw.emit(Buffer.alloc(KB))
+      }
     }
   }, 1000 / FPS)
 
