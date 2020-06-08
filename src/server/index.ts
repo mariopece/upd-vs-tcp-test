@@ -16,7 +16,7 @@ io1.onConnection((channel: ServerChannel) => {
 
   const interval = setInterval(() => {
     sent++
-    if (sent >= 1800) return
+    if (sent >= 500) return
 
     // @ts-ignore
     if (channel.dataChannel.bufferedAmount === 0) {
