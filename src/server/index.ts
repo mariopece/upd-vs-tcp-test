@@ -17,13 +17,20 @@ io1.onConnection(channel => {
     if (channel.dataChannel.bufferedAmount === 0) {
       channel.raw.emit(Buffer.alloc(KB))
     } else {
-      let b = channel.dataChannel.bufferedAmount / KB
-      let random = 1 - 1 / b / 2
+      let ratio = channel.dataChannel.bufferedAmount / KB
+      let random = 1 - 1 / ratio
 
       if (Math.random() > random) {
         channel.raw.emit(Buffer.alloc(KB))
       } else {
-        console.log('drop message for ', id, 'at: ', new Date().getTime())
+        console.log(
+          'drop message for ',
+          id,
+          'ratio: ',
+          ratio,
+          'at: ',
+          new Date().getTime()
+        )
       }
     }
   }, 1000 / FPS)
