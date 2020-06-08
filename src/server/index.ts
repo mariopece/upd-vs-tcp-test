@@ -22,5 +22,5 @@ io1.onConnection(channel => {
 
   setTimeout(() => {
     clearInterval(interval)
-  }, 30000)
+  }, 60000)
 })

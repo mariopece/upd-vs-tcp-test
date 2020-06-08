@@ -28,6 +28,5 @@ channel.onConnect(error => {
       2
     )} MBytes/s`
     h1.innerHTML = text
-    console.log(text)
   })
 })
