@@ -10,6 +10,8 @@ channel.onConnect(error => {
     return
   }
 
+  console.log('you are connected')
+
   let i = 0
   let bytes = 0
   let time = 0

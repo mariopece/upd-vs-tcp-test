@@ -9,6 +9,8 @@ io1.listen()
 io1.onConnection(channel => {
   const { id } = channel
 
+  console.log(id, 'is connected')
+
   const interval = setInterval(() => {
     // send 16 kiloBytes
     channel.raw.emit(Buffer.alloc(16 * 1024))
