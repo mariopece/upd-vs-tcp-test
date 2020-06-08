@@ -7,16 +7,22 @@ const KB = 16 * 1024
 
 // const io1 = geckos({ iceServers })
 const io1 = geckos({ iceServers })
-io1.onConnection((channel: ServerChannel) => {})
 io1.listen()
 
-io1.onConnection(channel => {
+io1.onConnection((channel: ServerChannel) => {
   const { id } = channel
 
+  let sent = -1
+
   const interval = setInterval(() => {
+    sent++
+    if (sent >= 1800) return
+
+    // @ts-ignore
     if (channel.dataChannel.bufferedAmount === 0) {
       channel.raw.emit(Buffer.alloc(KB))
     } else {
+      // @ts-ignore
       let ratio = channel.dataChannel.bufferedAmount / KB
 
       let random = 1 - 1 / ratio / 2
@@ -38,5 +44,6 @@ io1.onConnection(channel => {
 
   setTimeout(() => {
     clearInterval(interval)
-  }, 60000)
+    channel.close()
+  }, 45000)
 })
