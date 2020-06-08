@@ -21,8 +21,9 @@ io1.onConnection(channel => {
       let random = 1 - 1 / b / 2
 
       if (Math.random() > random) {
-        // console.log('send buffered message', b, random)
         channel.raw.emit(Buffer.alloc(KB))
+      } else {
+        console.log('drop message for ', id)
       }
     }
   }, 1000 / FPS)
