@@ -13,10 +13,14 @@ io1.onConnection(channel => {
 
   const interval = setInterval(() => {
     // send 16 kiloBytes
-    channel.raw.emit(Buffer.alloc(16 * 1024))
+
+    // console.log(channel.dataChannel.bufferedAmount)
+    if (channel.dataChannel.bufferedAmount < 256 * 1024) {
+      channel.raw.emit(Buffer.alloc(64 * 1024))
+    }
   }, 0)
 
   setTimeout(() => {
     clearInterval(interval)
-  }, 10000)
+  }, 30000)
 })
