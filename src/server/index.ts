@@ -12,21 +12,11 @@ io1.listen()
 io1.onConnection(channel => {
   const { id } = channel
 
-  channel.pause = false
-
   const interval = setInterval(() => {
-    if (channel.pause) return
-
     if (channel.dataChannel.bufferedAmount === 0) {
       channel.raw.emit(Buffer.alloc(16 * 1024))
     } else {
-      channel.pause = true
-
-      // console.log(new Date().getTime(), 'pause', id)
-
-      setTimeout(() => {
-        channel.pause = false
-      }, (1000 / FPS) * 2)
+      if (Math.random() > 0.5) channel.raw.emit(Buffer.alloc(16 * 1024))
     }
   }, 1000 / FPS)
 
