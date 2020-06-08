@@ -16,7 +16,7 @@ io1.onConnection(channel => {
 
     // console.log(channel.dataChannel.bufferedAmount)
     if (channel.dataChannel.bufferedAmount < 256 * 1024) {
-      channel.raw.emit(Buffer.alloc(64 * 1024))
+      channel.raw.emit(Buffer.alloc(32 * 1024))
     }
   }, 0)
 
