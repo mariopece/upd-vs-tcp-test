@@ -23,7 +23,7 @@ io1.onConnection(channel => {
       if (Math.random() > random) {
         channel.raw.emit(Buffer.alloc(KB))
       } else {
-        console.log('drop message for ', id)
+        console.log('drop message for ', id, 'at: ', new Date().getTime())
       }
     }
   }, 1000 / FPS)
