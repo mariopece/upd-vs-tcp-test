@@ -2,8 +2,8 @@ import { ExtendedObject3D } from 'enable3d'
 import geckos, { iceServers, ServerChannel } from '@geckos.io/server'
 import { Ammo, Physics, ServerClock } from '@enable3d/ammo-on-nodejs'
 
-const FPS = 60
-const KB = 16 * 1024
+const FPS = 20
+const KB = 4 * 1024
 
 // const io1 = geckos({ iceServers })
 const io1 = geckos({ iceServers })
