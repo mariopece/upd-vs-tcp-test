@@ -16,7 +16,7 @@ io1.onConnection(channel => {
     if (channel.dataChannel.bufferedAmount === 0) {
       channel.raw.emit(Buffer.alloc(16 * 1024))
     } else {
-      if (Math.random() > 0.5) channel.raw.emit(Buffer.alloc(16 * 1024))
+      if (Math.random() > 0.75) channel.raw.emit(Buffer.alloc(16 * 1024))
     }
   }, 1000 / FPS)
 
