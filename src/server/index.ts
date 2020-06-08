@@ -12,11 +12,9 @@ io1.onConnection(channel => {
   console.log(id, 'is connected')
 
   const interval = setInterval(() => {
-    // send 16 kiloBytes
-
     // console.log(channel.dataChannel.bufferedAmount)
     if (channel.dataChannel.bufferedAmount === 0) {
-      channel.raw.emit(Buffer.alloc(32 * 1024))
+      channel.raw.emit(Buffer.alloc(8 * 1024))
     } else console.log('buffering for', id)
   }, 1000 / 60)
 
