@@ -15,10 +15,10 @@ io1.onConnection(channel => {
     // send 16 kiloBytes
 
     // console.log(channel.dataChannel.bufferedAmount)
-    if (channel.dataChannel.bufferedAmount < 256 * 1024) {
+    if (channel.dataChannel.bufferedAmount === 0) {
       channel.raw.emit(Buffer.alloc(32 * 1024))
-    }
-  }, 0)
+    } else console.log('buffering for', id)
+  }, 1000 / 60)
 
   setTimeout(() => {
     clearInterval(interval)
