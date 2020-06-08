@@ -15,18 +15,29 @@ channel.onConnect(error => {
   console.log('you are connected')
 
   let i = 0
-  let bytes = 0
+  let bytesTotal = 0
+  let bytesLast = 0
   let time = 0
+
+  const interval = 2
+  setInterval(() => {
+    const bytes = bytesTotal - bytesLast
+    const text = `Packages: ${i} @ ${((bytes / 1024 / 1024) * interval).toFixed(
+      2
+    )} MBytes/s`
+
+    h1.innerHTML = text
+    bytesLast = bytesTotal
+  }, 1000 / interval)
+
   channel.onRaw(data => {
     i++
     if (i === 1) time = new Date().getTime()
     const now = new Date().getTime()
     // @ts-ignore
     const length = new Uint8Array(data).length
-    bytes += length
-    const text = `Packages: ${i} @ ${(bytes / 1024 / (now - time)).toFixed(
-      2
-    )} MBytes/s`
-    h1.innerHTML = text
+    bytesTotal += length
+
+    time = new Date().getTime()
   })
 })
