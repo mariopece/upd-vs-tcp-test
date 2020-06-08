@@ -21,7 +21,7 @@ io1.onConnection(channel => {
 
       let random = 1 - 1 / ratio / 2
 
-      if (ratio <= 10 && Math.random() > random) {
+      if (ratio <= 4 && Math.random() > random) {
         channel.raw.emit(Buffer.alloc(KB))
       } else {
         console.log(
