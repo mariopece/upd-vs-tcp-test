@@ -2,7 +2,7 @@ require('./dist/server/bundle.js')
 
 const express = require('express')
 const app = express()
-const port = 8080
+const port = process.env.port || 3000
 
 app.get('/', (req, res) => res.redirect('./index.html'))
 
